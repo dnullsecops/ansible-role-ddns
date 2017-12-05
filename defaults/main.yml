@@ -1,0 +1,5 @@
+role_ddns:
+  rpm: https://www.rpmfind.net/linux/fedora/linux/releases/25/Everything/x86_64/os/Packages/n/noip-2.1.9-20.fc25.x86_64.rpm
+  email: ""
+  pass: ""
+  interval: 30

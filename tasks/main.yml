@@ -1,0 +1,24 @@
+- name: "Install - NoIp"
+  package:
+    name: "{{ role_ddns.rpm }}"
+    state: latest
+  tags:
+  - noip_install
+
+- name: "Service - Enable NoIp"
+  service: name=noip enabled=yes
+  tags:
+  - noip_install
+  - noip_enable
+
+- name: "Config - parsing vars as NoIp config to /etc/no-ip2.conf"
+  command: "noip2 -C -u {{ role_ddns.email }} -p {{ role_ddns.pass }} -U {{ role_ddns.interval }} -Y"
+  # TODO: need to fix -Y and add options to choose domain
+  tags:
+  - noip_config
+
+- name: "Service - reStarting NoIp"
+  service: name=noip state=restarted
+  tags:
+  - noip_install
+  - noip_start
